@@ -70,14 +70,26 @@ export async function fetchServerByIdOrSlug(idOrSlug: string): Promise<McpServer
   const supabase = await getSupabaseClient();
   if (supabase) {
     try {
-      // Try by slug first, then by id
-      const { data } = await supabase
+      // Try by slug first (always safe, no UUID cast)
+      const { data: bySlug } = await supabase
         .from("mcp_servers")
         .select("*")
-        .or(`id.eq.${idOrSlug},slug.eq.${idOrSlug}`)
+        .eq("slug", idOrSlug)
         .limit(1)
-        .single();
-      if (data) return data as McpServer;
+        .maybeSingle();
+      if (bySlug) return bySlug as McpServer;
+
+      // Try by UUID id (only if it looks like a UUID)
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(idOrSlug);
+      if (isUuid) {
+        const { data: byId } = await supabase
+          .from("mcp_servers")
+          .select("*")
+          .eq("id", idOrSlug)
+          .limit(1)
+          .maybeSingle();
+        if (byId) return byId as McpServer;
+      }
     } catch (e) {
       console.warn("[data] Supabase fetchServerByIdOrSlug failed, using mock:", e);
     }
