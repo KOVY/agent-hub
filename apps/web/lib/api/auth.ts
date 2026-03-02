@@ -1,19 +1,5 @@
 import { type NextRequest } from "next/server";
-
-// Demo agent key for development
-const DEMO_KEYS = new Map([
-  [
-    "af_demo_key_0123456789abcdef0123456789abcdef",
-    {
-      id: "key-001",
-      owner_id: "demo-user",
-      name: "Demo Key",
-      monthly_limit: 100,
-      calls_this_month: 0,
-      is_active: true,
-    },
-  ],
-]);
+import { createClient } from "@supabase/supabase-js";
 
 export interface ValidatedKey {
   id: string;
@@ -23,18 +9,42 @@ export interface ValidatedKey {
   calls_this_month: number;
 }
 
-export function validateApiKey(
+// Service-role client for API key validation (no user session needed)
+function getServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceKey) return null;
+
+  return createClient(url, serviceKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
+
+export async function validateApiKey(
   request: NextRequest
-): ValidatedKey | null {
+): Promise<ValidatedKey | null> {
   const apiKey = request.headers.get("X-API-Key");
-  if (!apiKey) return null;
+  if (!apiKey || !apiKey.startsWith("af_")) return null;
 
-  // Check demo keys first (for development)
-  const demoKey = DEMO_KEYS.get(apiKey);
-  if (demoKey) return demoKey;
+  const supabase = getServiceClient();
+  if (!supabase) return null;
 
-  // TODO: In production, check Supabase agent_keys table
-  return null;
+  const { data: key, error } = await supabase
+    .from("agent_keys")
+    .select("id, owner_id, name, monthly_limit, calls_this_month, is_active")
+    .eq("api_key", apiKey)
+    .single();
+
+  if (error || !key || !key.is_active) return null;
+
+  return {
+    id: key.id,
+    owner_id: key.owner_id,
+    name: key.name,
+    monthly_limit: key.monthly_limit ?? 100,
+    calls_this_month: key.calls_this_month ?? 0,
+  };
 }
 
 export function isRateLimited(key: ValidatedKey): boolean {

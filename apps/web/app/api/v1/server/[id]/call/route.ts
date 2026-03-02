@@ -3,7 +3,7 @@ import { apiError } from "@/lib/api/response";
 import { validateApiKey } from "@/lib/api/auth";
 import {
   checkRateLimit,
-  incrementRateLimit,
+  recordUsage,
   getRateLimitHeaders,
 } from "@/lib/api/rate-limit";
 import { proxyMcpCall } from "@/lib/api/proxy";
@@ -16,14 +16,14 @@ export async function POST(
 ) {
   const { id } = await params;
 
-  // 1. Authenticate
-  const key = validateApiKey(request);
+  // 1. Authenticate via Supabase agent_keys
+  const key = await validateApiKey(request);
   if (!key) {
     return apiError("Missing or invalid API key. Set X-API-Key header.", 401);
   }
 
-  // 2. Rate limit
-  const rateCheck = checkRateLimit(key.id, key.monthly_limit);
+  // 2. Rate limit check (DB-backed)
+  const rateCheck = checkRateLimit(key.calls_this_month, key.monthly_limit);
   if (!rateCheck.allowed) {
     const headers = getRateLimitHeaders(key.monthly_limit, 0);
     return NextResponse.json(
@@ -61,14 +61,19 @@ export async function POST(
     body.input ?? {}
   );
 
-  // 6. Increment rate limit
-  incrementRateLimit(key.id);
-  const updatedRate = checkRateLimit(key.id, key.monthly_limit);
+  // 6. Record usage in DB (increment counter + write log)
+  await recordUsage(
+    key.id,
+    server.id,
+    body.tool,
+    result.response_ms,
+    result.success
+  );
 
   // 7. Return response with rate limit headers
   const headers = getRateLimitHeaders(
     key.monthly_limit,
-    updatedRate.remaining
+    Math.max(0, rateCheck.remaining - 1)
   );
 
   return NextResponse.json(

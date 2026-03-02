@@ -9,12 +9,12 @@ export async function GET(
 ) {
   const { id: _agentId } = await params;
 
-  const key = validateApiKey(request);
+  const key = await validateApiKey(request);
   if (!key) {
     return apiError("Missing or invalid API key", 401);
   }
 
-  const rateCheck = checkRateLimit(key.id, key.monthly_limit);
+  const rateCheck = checkRateLimit(key.calls_this_month, key.monthly_limit);
 
   return apiSuccess({
     key_name: key.name,

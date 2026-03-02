@@ -1,25 +1,75 @@
-// In-memory rate limiting for demo
-// Production: use Supabase agent_keys.calls_this_month
+import { createClient } from "@supabase/supabase-js";
 
-const callCounts = new Map<string, number>();
+function getServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceKey) return null;
+  return createClient(url, serviceKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
 
 export function checkRateLimit(
-  keyId: string,
+  callsThisMonth: number,
   monthlyLimit: number
 ): { allowed: boolean; remaining: number; used: number } {
-  const current = callCounts.get(keyId) ?? 0;
-  const remaining = Math.max(0, monthlyLimit - current);
-
+  const remaining = Math.max(0, monthlyLimit - callsThisMonth);
   return {
-    allowed: current < monthlyLimit,
+    allowed: callsThisMonth < monthlyLimit,
     remaining,
-    used: current,
+    used: callsThisMonth,
   };
 }
 
-export function incrementRateLimit(keyId: string): void {
-  const current = callCounts.get(keyId) ?? 0;
-  callCounts.set(keyId, current + 1);
+/**
+ * Increment calls_this_month on the agent_keys row
+ * and log the call to usage_logs.
+ */
+export async function recordUsage(
+  keyId: string,
+  serverId: string,
+  toolName: string,
+  responseMs: number,
+  success: boolean
+): Promise<void> {
+  const supabase = getServiceClient();
+  if (!supabase) return;
+
+  // Increment calls_this_month — try RPC first, fallback to read+write
+  const { error: rpcError } = await supabase.rpc("increment_calls", {
+    key_id: keyId,
+  });
+
+  if (rpcError) {
+    // Fallback: read current count + write incremented
+    const { data } = await supabase
+      .from("agent_keys")
+      .select("calls_this_month")
+      .eq("id", keyId)
+      .single();
+
+    if (data) {
+      await supabase
+        .from("agent_keys")
+        .update({ calls_this_month: (data.calls_this_month ?? 0) + 1 })
+        .eq("id", keyId);
+    }
+  }
+
+  // Update last_used_at
+  await supabase
+    .from("agent_keys")
+    .update({ last_used_at: new Date().toISOString() })
+    .eq("id", keyId);
+
+  // Log to usage_logs
+  await supabase.from("usage_logs").insert({
+    agent_key_id: keyId,
+    server_id: serverId,
+    tool_name: toolName,
+    response_ms: responseMs,
+    status_code: success ? 200 : 502,
+  });
 }
 
 export function getRateLimitHeaders(
