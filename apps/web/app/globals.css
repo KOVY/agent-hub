@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0a0a0f;
+  --color-foreground: #f0f0f5;
+  --color-muted: #1a1a2e;
+  --color-muted-foreground: #a0a0b8;
+  --color-card: #12121f;
+  --color-card-foreground: #f0f0f5;
+  --color-border: #2a2a40;
+  --color-primary: #6c5ce7;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #00d2ff;
+  --color-accent-foreground: #0a0a0f;
+  --color-destructive: #ff4757;
+  --color-success: #2ed573;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+/* Gradient effects */
+.gradient-hero {
+  background: linear-gradient(135deg, #6c5ce7 0%, #00d2ff 50%, #6c5ce7 100%);
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6c5ce7, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(18, 18, 31, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}

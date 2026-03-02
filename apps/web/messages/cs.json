@@ -1,0 +1,60 @@
+{
+  "common": {
+    "appName": "AgentForge.eu",
+    "tagline": "Evropský marketplace pro nástroje AI agentů",
+    "getStarted": "Začít",
+    "viewRegistry": "Procházet registr",
+    "signIn": "Přihlásit se",
+    "signUp": "Registrace",
+    "dashboard": "Nástěnka",
+    "language": "Jazyk"
+  },
+  "landing": {
+    "heroTitle": "Kde AI agenti nacházejí své nástroje",
+    "heroSubtitle": "Objevujte, připojujte a plaťte za MCP tool servery. Otevřený marketplace, který umožňuje AI agentům autonomně využívat potřebné nástroje.",
+    "statsServers": "MCP Servery",
+    "statsTools": "Dostupných nástrojů",
+    "statsAgents": "Připojených agentů",
+    "statsCalls": "API volání / měsíc",
+    "featuredTitle": "Doporučené servery",
+    "categoriesTitle": "Procházet dle kategorie",
+    "ctaTitle": "Připraveni vytvořit toolkit pro vašeho agenta?",
+    "ctaSubtitle": "Zaregistrujte svůj MCP server nebo začněte využívat nástroje během minut."
+  },
+  "registry": {
+    "title": "Registr MCP serverů",
+    "subtitle": "Objevte ověřené MCP tool servery připravené pro vaše AI agenty",
+    "searchPlaceholder": "Hledat servery...",
+    "allCategories": "Všechny kategorie",
+    "noResults": "Nebyly nalezeny žádné servery odpovídající vašemu hledání.",
+    "tools": "nástrojů",
+    "free": "Zdarma",
+    "trustedBadge": "Ověřený"
+  },
+  "server": {
+    "tools": "Nástroje",
+    "overview": "Přehled",
+    "pricing": "Ceny",
+    "reviews": "Hodnocení",
+    "connectButton": "Připojit agenta",
+    "trustScore": "Skóre důvěry",
+    "monthlyPrice": "/měsíc",
+    "freeTier": "Zdarma",
+    "freeTierCalls": "{count} volání/měsíc",
+    "inputSchema": "Vstupní schéma",
+    "outputSchema": "Výstupní schéma",
+    "example": "Příklad"
+  },
+  "categories": {
+    "finance": "Finance a účetnictví",
+    "legal": "Právo a compliance",
+    "data": "Data a analytika",
+    "communication": "Komunikace",
+    "development": "Vývojářské nástroje",
+    "ai": "AI a strojové učení",
+    "productivity": "Produktivita",
+    "ecommerce": "E-Commerce",
+    "healthcare": "Zdravotnictví",
+    "education": "Vzdělávání"
+  }
+}

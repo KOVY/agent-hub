@@ -1,0 +1,60 @@
+{
+  "common": {
+    "appName": "AgentForge.eu",
+    "tagline": "Der EU-First Marktplatz für KI-Agenten-Tools",
+    "getStarted": "Loslegen",
+    "viewRegistry": "Registry durchsuchen",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "dashboard": "Dashboard",
+    "language": "Sprache"
+  },
+  "landing": {
+    "heroTitle": "Wo KI-Agenten ihre Werkzeuge finden",
+    "heroSubtitle": "Entdecken, verbinden und bezahlen Sie MCP-Tool-Server. Der offene Marktplatz, der KI-Agenten die autonome Nutzung benötigter Tools ermöglicht.",
+    "statsServers": "MCP-Server",
+    "statsTools": "Verfügbare Tools",
+    "statsAgents": "Verbundene Agenten",
+    "statsCalls": "API-Aufrufe / Monat",
+    "featuredTitle": "Empfohlene Server",
+    "categoriesTitle": "Nach Kategorie durchsuchen",
+    "ctaTitle": "Bereit, das Toolkit Ihres Agenten zu schmieden?",
+    "ctaSubtitle": "Registrieren Sie Ihren MCP-Server oder beginnen Sie in Minuten mit der Nutzung von Tools."
+  },
+  "registry": {
+    "title": "MCP-Server-Registry",
+    "subtitle": "Entdecken Sie verifizierte MCP-Tool-Server für Ihre KI-Agenten",
+    "searchPlaceholder": "Server suchen...",
+    "allCategories": "Alle Kategorien",
+    "noResults": "Keine Server gefunden, die Ihrer Suche entsprechen.",
+    "tools": "Tools",
+    "free": "Kostenlos",
+    "trustedBadge": "Verifiziert"
+  },
+  "server": {
+    "tools": "Tools",
+    "overview": "Übersicht",
+    "pricing": "Preise",
+    "reviews": "Bewertungen",
+    "connectButton": "Agent verbinden",
+    "trustScore": "Vertrauenswert",
+    "monthlyPrice": "/Monat",
+    "freeTier": "Kostenlos",
+    "freeTierCalls": "{count} Aufrufe/Monat",
+    "inputSchema": "Eingabeschema",
+    "outputSchema": "Ausgabeschema",
+    "example": "Beispiel"
+  },
+  "categories": {
+    "finance": "Finanzen & Buchhaltung",
+    "legal": "Recht & Compliance",
+    "data": "Daten & Analytik",
+    "communication": "Kommunikation",
+    "development": "Entwicklerwerkzeuge",
+    "ai": "KI & Maschinelles Lernen",
+    "productivity": "Produktivität",
+    "ecommerce": "E-Commerce",
+    "healthcare": "Gesundheitswesen",
+    "education": "Bildung"
+  }
+}

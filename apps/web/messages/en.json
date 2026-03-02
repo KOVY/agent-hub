@@ -1,0 +1,60 @@
+{
+  "common": {
+    "appName": "AgentForge.eu",
+    "tagline": "The EU-First Marketplace for AI Agent Tools",
+    "getStarted": "Get Started",
+    "viewRegistry": "Browse Registry",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "dashboard": "Dashboard",
+    "language": "Language"
+  },
+  "landing": {
+    "heroTitle": "Where AI Agents Find Their Tools",
+    "heroSubtitle": "Discover, connect, and pay for MCP tool servers. The open marketplace that lets AI agents autonomously use the tools they need.",
+    "statsServers": "MCP Servers",
+    "statsTools": "Available Tools",
+    "statsAgents": "Connected Agents",
+    "statsCalls": "API Calls / Month",
+    "featuredTitle": "Featured Servers",
+    "categoriesTitle": "Browse by Category",
+    "ctaTitle": "Ready to forge your agent's toolkit?",
+    "ctaSubtitle": "Register your MCP server or start using tools in minutes."
+  },
+  "registry": {
+    "title": "MCP Server Registry",
+    "subtitle": "Discover verified MCP tool servers ready for your AI agents",
+    "searchPlaceholder": "Search servers...",
+    "allCategories": "All Categories",
+    "noResults": "No servers found matching your search.",
+    "tools": "tools",
+    "free": "Free",
+    "trustedBadge": "Trusted"
+  },
+  "server": {
+    "tools": "Tools",
+    "overview": "Overview",
+    "pricing": "Pricing",
+    "reviews": "Reviews",
+    "connectButton": "Connect Agent",
+    "trustScore": "Trust Score",
+    "monthlyPrice": "/month",
+    "freeTier": "Free Tier",
+    "freeTierCalls": "{count} calls/month",
+    "inputSchema": "Input Schema",
+    "outputSchema": "Output Schema",
+    "example": "Example"
+  },
+  "categories": {
+    "finance": "Finance & Accounting",
+    "legal": "Legal & Compliance",
+    "data": "Data & Analytics",
+    "communication": "Communication",
+    "development": "Development Tools",
+    "ai": "AI & Machine Learning",
+    "productivity": "Productivity",
+    "ecommerce": "E-Commerce",
+    "healthcare": "Healthcare",
+    "education": "Education"
+  }
+}
