@@ -162,7 +162,6 @@ export async function incrementKeyUsage(
     await supabase
       .from("agent_keys")
       .update({
-        calls_this_month: supabase.rpc ? undefined : 0, // will be handled by raw SQL
         last_used_at: new Date().toISOString(),
       })
       .eq("id", keyId);

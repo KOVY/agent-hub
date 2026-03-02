@@ -1,4 +1,4 @@
+// Client-safe exports only — no next/headers imports
 export { createBrowserSupabaseClient } from "./client";
-export { createServerSupabaseClient, createServiceClient } from "./server";
 export * from "./types";
 export * from "./queries";
