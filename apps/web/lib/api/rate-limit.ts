@@ -63,13 +63,21 @@ export async function recordUsage(
     .eq("id", keyId);
 
   // Log to usage_logs
-  await supabase.from("usage_logs").insert({
+  const { error: logError } = await supabase.from("usage_logs").insert({
     agent_key_id: keyId,
     server_id: serverId,
     tool_name: toolName,
     response_ms: responseMs,
     status_code: success ? 200 : 502,
   });
+
+  if (logError) {
+    console.error("[usage_logs] Insert failed:", logError.message, {
+      keyId,
+      serverId,
+      toolName,
+    });
+  }
 }
 
 export function getRateLimitHeaders(
