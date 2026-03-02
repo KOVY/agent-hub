@@ -7,7 +7,7 @@ import {
   getRateLimitHeaders,
 } from "@/lib/api/rate-limit";
 import { proxyMcpCall } from "@/lib/api/proxy";
-import { MOCK_SERVERS } from "@/lib/mock-data";
+import { fetchServerByIdOrSlug } from "@/lib/data";
 import { NextResponse } from "next/server";
 
 export async function POST(
@@ -36,10 +36,8 @@ export async function POST(
     );
   }
 
-  // 3. Find server
-  const server = MOCK_SERVERS.find(
-    (s) => s.id === id || s.slug === id
-  );
+  // 3. Find server (from Supabase or mock)
+  const server = await fetchServerByIdOrSlug(id);
   if (!server) {
     return apiError("Server not found", 404);
   }

@@ -35,6 +35,12 @@ export function Header() {
             {t("viewRegistry")}
           </Link>
           <Link
+            href="/pricing"
+            className="hidden sm:inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Pricing
+          </Link>
+          <Link
             href="/dashboard"
             className="hidden sm:inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors"
           >

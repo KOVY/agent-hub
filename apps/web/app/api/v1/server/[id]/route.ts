@@ -1,6 +1,6 @@
 import { type NextRequest } from "next/server";
 import { apiSuccess, apiError } from "@/lib/api/response";
-import { MOCK_SERVERS, getMockTools } from "@/lib/mock-data";
+import { fetchServerByIdOrSlug, fetchToolsByServerId } from "@/lib/data";
 
 export async function GET(
   _request: NextRequest,
@@ -8,16 +8,13 @@ export async function GET(
 ) {
   const { id } = await params;
 
-  // Support lookup by ID or slug
-  const server = MOCK_SERVERS.find(
-    (s) => s.id === id || s.slug === id
-  );
+  const server = await fetchServerByIdOrSlug(id);
 
   if (!server) {
     return apiError("Server not found", 404);
   }
 
-  const tools = getMockTools(server.slug);
+  const tools = await fetchToolsByServerId(server.id);
 
   return apiSuccess({
     ...server,

@@ -5,7 +5,12 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ToolCard } from "@/components/tool-card";
 import { Link } from "@/i18n/navigation";
-import { MOCK_SERVERS, getMockTools } from "@/lib/mock-data";
+import {
+  fetchServerBySlug,
+  fetchToolsByServerSlug,
+  fetchAllServerSlugs,
+} from "@/lib/data";
+import type { McpServer, McpTool } from "@agent-hub/db";
 
 interface ServerPageProps {
   params: Promise<{ slug: string; locale: string }>;
@@ -15,7 +20,7 @@ export async function generateMetadata({
   params,
 }: ServerPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const server = MOCK_SERVERS.find((s) => s.slug === slug);
+  const server = await fetchServerBySlug(slug);
   if (!server) return {};
 
   return {
@@ -37,13 +42,13 @@ export async function generateMetadata({
 
 export default async function ServerPage({ params }: ServerPageProps) {
   const { slug } = await params;
-  const server = MOCK_SERVERS.find((s) => s.slug === slug);
+  const server = await fetchServerBySlug(slug);
 
   if (!server) {
     notFound();
   }
 
-  const tools = getMockTools(slug);
+  const tools = await fetchToolsByServerSlug(slug);
 
   return <ServerDetailView server={server} tools={tools} />;
 }
@@ -52,8 +57,8 @@ function ServerDetailView({
   server,
   tools,
 }: {
-  server: (typeof MOCK_SERVERS)[number];
-  tools: ReturnType<typeof getMockTools>;
+  server: McpServer;
+  tools: McpTool[];
 }) {
   const t = useTranslations();
 
@@ -178,6 +183,7 @@ function ServerDetailView({
   );
 }
 
-export function generateStaticParams() {
-  return MOCK_SERVERS.map((server) => ({ slug: server.slug }));
+export async function generateStaticParams() {
+  const slugs = await fetchAllServerSlugs();
+  return slugs.map((slug) => ({ slug }));
 }

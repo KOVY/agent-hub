@@ -3,11 +3,20 @@ import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ServerCard } from "@/components/server-card";
-import { MOCK_SERVERS } from "@/lib/mock-data";
+import { fetchServers } from "@/lib/data";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredServers = await fetchServers({ featured: true });
+
+  return <HomeView featuredServers={featuredServers} />;
+}
+
+function HomeView({
+  featuredServers,
+}: {
+  featuredServers: Awaited<ReturnType<typeof fetchServers>>;
+}) {
   const t = useTranslations();
-  const featuredServers = MOCK_SERVERS.filter((s) => s.is_featured);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -35,7 +44,7 @@ export default function HomePage() {
                   {t("common.viewRegistry")}
                 </Link>
                 <Link
-                  href="/registry"
+                  href="/pricing"
                   className="px-8 py-3 border border-border rounded-lg font-medium hover:bg-muted transition-colors text-center"
                 >
                   {t("common.getStarted")}

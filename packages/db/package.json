@@ -15,8 +15,12 @@
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.49.0"
   },
+  "peerDependencies": {
+    "next": ">=15.0.0"
+  },
   "devDependencies": {
     "@agent-hub/config": "workspace:*",
+    "next": "^15.5.0",
     "typescript": "^5.7.0"
   }
 }
