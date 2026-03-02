@@ -72,11 +72,19 @@ export async function recordUsage(
   });
 
   if (logError) {
-    console.error("[usage_logs] Insert failed:", logError.message, {
-      keyId,
-      serverId,
-      toolName,
-    });
+    console.error(
+      "[usage_logs] Insert failed: " +
+        JSON.stringify({
+          code: logError.code,
+          msg: logError.message,
+          details: logError.details,
+          hint: logError.hint,
+          keyId,
+          serverId,
+          toolName,
+          responseMs,
+        })
+    );
   }
 }
 
