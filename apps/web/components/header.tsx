@@ -34,6 +34,12 @@ export function Header() {
           >
             {t("viewRegistry")}
           </Link>
+          <Link
+            href="/dashboard"
+            className="hidden sm:inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t("dashboard")}
+          </Link>
 
           {/* Language switcher */}
           <div className="flex items-center gap-1 rounded-lg border border-border p-1">

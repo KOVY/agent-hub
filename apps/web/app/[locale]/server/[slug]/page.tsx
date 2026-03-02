@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Header } from "@/components/header";
@@ -8,6 +9,30 @@ import { MOCK_SERVERS, getMockTools } from "@/lib/mock-data";
 
 interface ServerPageProps {
   params: Promise<{ slug: string; locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ServerPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const server = MOCK_SERVERS.find((s) => s.slug === slug);
+  if (!server) return {};
+
+  return {
+    title: `${server.name} — MCP Server`,
+    description: server.description,
+    openGraph: {
+      title: `${server.name} | AgentForge.eu`,
+      description: server.description,
+      images: [
+        {
+          url: `/api/og?title=${encodeURIComponent(server.name)}&description=${encodeURIComponent(server.description)}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 }
 
 export default async function ServerPage({ params }: ServerPageProps) {

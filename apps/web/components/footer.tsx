@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export function Footer() {
   const t = useTranslations("common");
@@ -11,9 +12,17 @@ export function Footer() {
             <div className="w-6 h-6 rounded gradient-hero" />
             <span className="font-semibold">{t("appName")}</span>
           </div>
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} KOWEX Co. Holding. All rights reserved.
-          </p>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Terms
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} KOWEX Co. Holding
+            </p>
+          </div>
         </div>
       </div>
     </footer>

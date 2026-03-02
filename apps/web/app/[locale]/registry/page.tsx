@@ -9,6 +9,7 @@ import { CategoryFilter } from "@/components/category-filter";
 import { SearchBar } from "@/components/search-bar";
 import { MOCK_SERVERS } from "@/lib/mock-data";
 
+// Note: metadata for client components is set in the parent layout
 export default function RegistryPage() {
   const t = useTranslations();
   const [search, setSearch] = useState("");
