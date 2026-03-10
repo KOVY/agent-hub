@@ -10,6 +10,7 @@ export interface McpServer {
   icon_url: string | null;
   endpoint_url: string | null;
   owner_id: string | null;
+  agent_id: string | null;
 
   pricing_model: "free" | "freemium" | "paid";
   price_monthly: number;
@@ -90,6 +91,31 @@ export interface Rating {
 
   score: number;
   comment: string | null;
+
+  created_at: string;
+  updated_at: string;
+}
+
+// Agent identity — AI agents that interact with the marketplace
+export interface Agent {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  homepage_url: string | null;
+  capabilities: string[];
+
+  owner_id: string | null;
+  api_key: string;
+
+  monthly_limit: number;
+  calls_this_month: number;
+
+  is_active: boolean;
+  is_verified: boolean;
+  last_seen_at: string | null;
+
+  metadata: Record<string, unknown>;
 
   created_at: string;
   updated_at: string;

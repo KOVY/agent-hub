@@ -7,6 +7,8 @@ import { useState } from "react";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Overview", icon: "grid" },
+  { href: "/dashboard/servers", label: "My Servers", icon: "server" },
+  { href: "/dashboard/publish", label: "Publish Server", icon: "plus" },
   { href: "/dashboard/keys", label: "API Keys", icon: "key" },
   { href: "/dashboard/usage", label: "Usage", icon: "chart" },
 ] as const;

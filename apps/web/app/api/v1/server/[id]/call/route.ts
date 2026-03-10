@@ -67,7 +67,8 @@ export async function POST(
     server.id,
     body.tool,
     result.response_ms,
-    result.success
+    result.success,
+    key.type
   );
 
   // 7. Return response with rate limit headers

@@ -22,47 +22,59 @@ export function checkRateLimit(
 }
 
 /**
- * Increment calls_this_month on the agent_keys row
- * and log the call to usage_logs.
+ * Increment calls_this_month and log usage.
+ * Supports both user keys (agent_keys table) and agent keys (agents table).
  */
 export async function recordUsage(
   keyId: string,
   serverId: string,
   toolName: string,
   responseMs: number,
-  success: boolean
+  success: boolean,
+  keyType: "user_key" | "agent" = "user_key"
 ): Promise<void> {
   const supabase = getServiceClient();
   if (!supabase) return;
 
-  // Increment calls_this_month — try RPC first, fallback to read+write
-  const { error: rpcError } = await supabase.rpc("increment_calls", {
-    key_id: keyId,
-  });
-
-  if (rpcError) {
-    // Fallback: read current count + write incremented
-    const { data } = await supabase
-      .from("agent_keys")
-      .select("calls_this_month")
-      .eq("id", keyId)
-      .single();
-
-    if (data) {
+  if (keyType === "agent") {
+    // Increment on agents table
+    const { error } = await supabase.rpc("increment_agent_calls", {
+      p_agent_id: keyId,
+    });
+    if (error) {
       await supabase
-        .from("agent_keys")
-        .update({ calls_this_month: (data.calls_this_month ?? 0) + 1 })
+        .from("agents")
+        .update({ last_seen_at: new Date().toISOString() })
         .eq("id", keyId);
     }
+  } else {
+    // Increment on agent_keys table (original flow)
+    const { error: rpcError } = await supabase.rpc("increment_calls", {
+      key_id: keyId,
+    });
+
+    if (rpcError) {
+      const { data } = await supabase
+        .from("agent_keys")
+        .select("calls_this_month")
+        .eq("id", keyId)
+        .single();
+
+      if (data) {
+        await supabase
+          .from("agent_keys")
+          .update({ calls_this_month: (data.calls_this_month ?? 0) + 1 })
+          .eq("id", keyId);
+      }
+    }
+
+    await supabase
+      .from("agent_keys")
+      .update({ last_used_at: new Date().toISOString() })
+      .eq("id", keyId);
   }
 
-  // Update last_used_at
-  await supabase
-    .from("agent_keys")
-    .update({ last_used_at: new Date().toISOString() })
-    .eq("id", keyId);
-
-  // Log to usage_logs
+  // Log to usage_logs (agent_key_id works for both — it's the caller ID)
   const { error: logError } = await supabase.from("usage_logs").insert({
     agent_key_id: keyId,
     server_id: serverId,
