@@ -267,7 +267,7 @@ export default function PublishServerPage() {
           Agents can also publish servers programmatically:
         </p>
         <pre className="bg-muted rounded-lg p-3 overflow-x-auto text-xs">
-{`curl -X POST https://agentforge.eu/api/v1/servers \\
+{`curl -X POST https://agentforge.community/api/v1/servers \\
   -H "X-API-Key: YOUR_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{

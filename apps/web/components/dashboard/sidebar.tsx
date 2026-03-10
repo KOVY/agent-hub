@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/servers", label: "My Servers", icon: "server" },
   { href: "/dashboard/publish", label: "Publish Server", icon: "plus" },
   { href: "/dashboard/keys", label: "API Keys", icon: "key" },
+  { href: "/dashboard/billing", label: "Billing", icon: "creditcard" },
   { href: "/dashboard/usage", label: "Usage", icon: "chart" },
 ] as const;
 

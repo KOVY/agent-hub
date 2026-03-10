@@ -5,7 +5,7 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const title = searchParams.get("title") || "AgentForge.eu";
+  const title = searchParams.get("title") || "AgentForge";
   const description =
     searchParams.get("description") ||
     "The EU-First Marketplace for AI Agent Tools";
@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
                 color: "#f0f0f5",
               }}
             >
-              AgentForge.eu
+              AgentForge
             </span>
           </div>
 

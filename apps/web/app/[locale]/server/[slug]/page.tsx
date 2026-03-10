@@ -27,7 +27,7 @@ export async function generateMetadata({
     title: `${server.name} — MCP Server`,
     description: server.description,
     openGraph: {
-      title: `${server.name} | AgentForge.eu`,
+      title: `${server.name} | AgentForge`,
       description: server.description,
       images: [
         {

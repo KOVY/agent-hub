@@ -18,7 +18,7 @@ export default function PrivacyPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-semibold text-foreground">1. Data Controller</h2>
               <p>
-                KOWEX Co. Holding (&quot;we&quot;, &quot;us&quot;) operates AgentForge.eu. We are committed
+                KOWEX Co. Holding (&quot;we&quot;, &quot;us&quot;) operates AgentForge. We are committed
                 to protecting your privacy in compliance with the General Data Protection
                 Regulation (GDPR) and applicable EU/Czech law.
               </p>
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               <h2 className="text-xl font-semibold text-foreground">6. Contact</h2>
               <p>
                 For privacy inquiries, contact us at{" "}
-                <span className="text-primary">privacy@agentforge.eu</span>
+                <span className="text-primary">privacy@agentforge.community</span>
               </p>
             </section>
 

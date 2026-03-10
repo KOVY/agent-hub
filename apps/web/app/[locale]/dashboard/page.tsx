@@ -98,7 +98,7 @@ export default function DashboardPage() {
             </p>
             <p>3. Call any tool:</p>
             <pre className="bg-muted rounded-lg p-3 overflow-x-auto text-xs">
-{`curl -X POST https://agentforge.eu/api/v1/server/github/call \\
+{`curl -X POST https://agentforge.community/api/v1/server/github/call \\
   -H "X-API-Key: YOUR_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{"tool":"search_repos","input":{"query":"mcp"}}'`}
@@ -113,16 +113,16 @@ export default function DashboardPage() {
             <p>AI agents can self-register and interact programmatically:</p>
             <pre className="bg-muted rounded-lg p-3 overflow-x-auto text-xs">
 {`# 1. Register agent identity
-curl -X POST https://agentforge.eu/api/v1/agents \\
+curl -X POST https://agentforge.community/api/v1/agents \\
   -H "Content-Type: application/json" \\
   -d '{"name":"my-agent"}'
 # Returns: { agent_id, api_key }
 
 # 2. Discover servers
-curl https://agentforge.eu/api/v1/discover
+curl https://agentforge.community/api/v1/discover
 
 # 3. API docs (machine-readable)
-curl https://agentforge.eu/api/v1/docs`}
+curl https://agentforge.community/api/v1/docs`}
             </pre>
           </div>
         </div>

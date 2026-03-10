@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Link } from "@/i18n/navigation";
+import { PricingCTA } from "@/components/pricing-cta";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -64,8 +63,6 @@ const TIERS = [
 ] as const;
 
 export default function PricingPage() {
-  const t = useTranslations();
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -144,28 +141,10 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                {tier.cta === "getStarted" ? (
-                  <Link
-                    href="/dashboard/keys"
-                    className="block w-full py-3 text-center rounded-lg font-medium transition-all border border-border hover:bg-muted"
-                  >
-                    {t("common.getStarted")}
-                  </Link>
-                ) : tier.cta === "contactUs" ? (
-                  <button
-                    disabled
-                    className="w-full py-3 rounded-lg font-medium border border-border text-muted-foreground cursor-not-allowed"
-                  >
-                    Contact Us — Coming Soon
-                  </button>
-                ) : (
-                  <button
-                    disabled
-                    className="w-full py-3 rounded-lg font-medium bg-primary/50 text-primary-foreground cursor-not-allowed"
-                  >
-                    Coming Soon
-                  </button>
-                )}
+                <PricingCTA
+                  tier={tier.cta === "getStarted" ? "free" : tier.cta === "contactUs" ? "enterprise" : "pro"}
+                  highlighted={tier.highlighted}
+                />
               </div>
             ))}
           </div>

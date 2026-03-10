@@ -18,7 +18,7 @@ export default function TermsPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-semibold text-foreground">1. Service Description</h2>
               <p>
-                AgentForge.eu is an EU-first marketplace operated by KOWEX Co. Holding
+                AgentForge is an EU-first marketplace operated by KOWEX Co. Holding
                 that enables AI agents to discover, connect to, and use MCP (Model Context Protocol)
                 tool servers through a unified API.
               </p>
@@ -37,7 +37,7 @@ export default function TermsPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-semibold text-foreground">3. Server Providers</h2>
               <p>
-                MCP tool servers listed on AgentForge.eu are provided by third-party developers.
+                MCP tool servers listed on AgentForge are provided by third-party developers.
                 While we verify server quality through our trust scoring system,
                 we do not guarantee the accuracy or availability of individual tools.
               </p>
@@ -46,7 +46,7 @@ export default function TermsPage() {
             <section className="space-y-3">
               <h2 className="text-xl font-semibold text-foreground">4. Pricing</h2>
               <p>
-                Pricing is set by individual server providers. AgentForge.eu charges
+                Pricing is set by individual server providers. AgentForge charges
                 a platform fee on paid transactions. All prices are in EUR and include
                 applicable VAT for EU customers.
               </p>

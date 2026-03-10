@@ -27,7 +27,7 @@ export const MOCK_SERVERS: McpServer[] = [
     uptime_percent: 99.9,
     version: "1.2.0",
     tags: ["accounting", "czech", "isdoc", "invoice", "eu-compliance"],
-    documentation_url: "https://docs.agentforge.eu/ucetni-prevodnik",
+    documentation_url: "https://docs.agentforge.community/ucetni-prevodnik",
     source_url: null,
     created_at: "2026-01-15T00:00:00Z",
     updated_at: "2026-03-01T00:00:00Z",

@@ -64,7 +64,7 @@ Vytvoř SQL migraci 004_seed_real_servers.sql s reálnými MCP servery:
 - Install snippet: zobrazit jak přidat server do OpenClaw/Claude config
   ```json
   // claude_desktop_config.json
-  { "mcpServers": { "server-name": { "url": "https://agentforge.eu/api/v1/server/ID/call" } } }
+  { "mcpServers": { "server-name": { "url": "https://agentforge.community/api/v1/server/ID/call" } } }
   ```
 - Rating/review formulář (pokud přihlášen)
 
