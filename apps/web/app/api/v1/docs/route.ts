@@ -6,12 +6,15 @@ import { apiSuccess } from "@/lib/api/response";
  * Returns a machine-readable API reference that agents can use
  * to understand how to interact with AgentForge
  */
-export async function GET() {
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const baseUrl = `${url.protocol}//${url.host}/api/v1`;
+
   return apiSuccess({
     name: "AgentForge API",
     version: "1.0",
     description: "EU-First MCP Marketplace for AI Agents. Register, discover, and call MCP tool servers.",
-    base_url: "https://agentforge.community/api/v1",
+    base_url: baseUrl,
     authentication: {
       type: "api_key",
       header: "X-API-Key",

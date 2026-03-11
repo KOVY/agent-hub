@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const LOCALES = [
   { code: "en", label: "EN" },
@@ -18,6 +20,18 @@ export function Header() {
   const params = useParams();
   const router = useRouter();
   const currentLocale = params.locale as string;
+  const [user, setUser] = useState<{ email?: string } | null>(null);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <header className="border-b border-border/50 backdrop-blur-md bg-background/80 sticky top-0 z-50">
@@ -40,13 +54,6 @@ export function Header() {
           >
             Pricing
           </Link>
-          <Link
-            href="/dashboard"
-            className="hidden sm:inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {t("dashboard")}
-          </Link>
-
           {/* Language switcher */}
           <div className="flex items-center gap-1 rounded-lg border border-border p-1">
             {LOCALES.map((locale) => (
@@ -66,12 +73,21 @@ export function Header() {
             ))}
           </div>
 
-          <Link
-            href="/registry"
-            className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded-lg hover:opacity-90 transition-opacity"
-          >
-            {t("getStarted")}
-          </Link>
+          {user ? (
+            <Link
+              href="/dashboard"
+              className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded-lg hover:opacity-90 transition-opacity"
+            >
+              {t("dashboard")}
+            </Link>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded-lg hover:opacity-90 transition-opacity"
+            >
+              Sign In
+            </Link>
+          )}
         </nav>
       </div>
     </header>

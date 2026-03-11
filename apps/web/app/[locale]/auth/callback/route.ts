@@ -2,10 +2,14 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ locale: string }> }
+) {
+  const { locale } = await params;
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/en/dashboard";
+  const next = searchParams.get("next") ?? `/${locale}/dashboard`;
 
   if (code) {
     const cookieStore = await cookies();
@@ -33,5 +37,5 @@ export async function GET(request: NextRequest) {
   }
 
   // If no code or error, redirect to login
-  return NextResponse.redirect(`${origin}/en/auth/login`);
+  return NextResponse.redirect(`${origin}/${locale}/auth/login`);
 }
