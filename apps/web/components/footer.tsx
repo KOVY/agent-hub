@@ -19,9 +19,14 @@ export function Footer() {
             <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Terms
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <a
+              href="https://kowexconsulting.cz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
               &copy; {new Date().getFullYear()} KOWEX Co. Holding
-            </p>
+            </a>
           </div>
         </div>
       </div>
