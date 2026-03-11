@@ -1,0 +1,514 @@
+<!-- ============================================================
+     AgentForge.eu — Supabase Auth Email Templates
+
+     Copy each template section into Supabase Dashboard:
+     Authentication → Email Templates
+
+     6 Templates:
+       1. Confirm Sign Up
+       2. Invite User
+       3. Magic Link
+       4. Change Email Address
+       5. Reset Password
+       6. Reauthentication
+     ============================================================ -->
+
+
+<!-- ============================================================
+     1. CONFIRM SIGN UP
+     Subject: Confirm your AgentForge account
+     Variables: {{ .ConfirmationURL }}
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Confirm your AgentForge account</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0f;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 32px 0;">
+              <span style="font-size:28px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#8b5cf6,#a78bfa,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AgentForge</span>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1a1a2e;border-radius:12px;padding:40px 36px;border:1px solid rgba(139,92,246,0.15);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:22px;font-weight:600;color:#ffffff;padding:0 0 8px 0;">
+                    Welcome to AgentForge
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:15px;line-height:24px;color:#a1a1aa;padding:0 0 24px 0;">
+                    Thanks for signing up! AgentForge is the MCP marketplace where AI agents discover, connect to, and use tools and services. Confirm your email to get started.
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 24px 0;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;background-color:#8b5cf6;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:12px 32px;border-radius:8px;mso-padding-alt:12px 32px;">
+                      Confirm Email Address
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;line-height:20px;color:#71717a;padding:0;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ .ConfirmationURL }}" style="color:#8b5cf6;word-break:break-all;">{{ .ConfirmationURL }}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="font-size:13px;color:#71717a;line-height:20px;">
+                    AgentForge &mdash; The MCP Marketplace for AI Agents
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-size:12px;color:#52525b;padding:4px 0 0 0;">
+                    KOWEX Co. Holding &nbsp;&middot;&nbsp; <a href="https://agentforge.community/privacy" style="color:#52525b;text-decoration:underline;">Privacy Policy</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+<!-- ============================================================
+     2. INVITE USER
+     Subject: You've been invited to AgentForge
+     Variables: {{ .ConfirmationURL }}
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>You've been invited to AgentForge</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0f;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 32px 0;">
+              <span style="font-size:28px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#8b5cf6,#a78bfa,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AgentForge</span>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1a1a2e;border-radius:12px;padding:40px 36px;border:1px solid rgba(139,92,246,0.15);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:22px;font-weight:600;color:#ffffff;padding:0 0 8px 0;">
+                    You've Been Invited
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:15px;line-height:24px;color:#a1a1aa;padding:0 0 24px 0;">
+                    Someone has invited you to join AgentForge &mdash; the MCP marketplace where AI agents discover and connect to tools, APIs, and services. Accept the invitation to create your account.
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 24px 0;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;background-color:#8b5cf6;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:12px 32px;border-radius:8px;mso-padding-alt:12px 32px;">
+                      Accept Invitation
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;line-height:20px;color:#71717a;padding:0;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ .ConfirmationURL }}" style="color:#8b5cf6;word-break:break-all;">{{ .ConfirmationURL }}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="font-size:13px;color:#71717a;line-height:20px;">
+                    AgentForge &mdash; The MCP Marketplace for AI Agents
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-size:12px;color:#52525b;padding:4px 0 0 0;">
+                    KOWEX Co. Holding &nbsp;&middot;&nbsp; <a href="https://agentforge.community/privacy" style="color:#52525b;text-decoration:underline;">Privacy Policy</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+<!-- ============================================================
+     3. MAGIC LINK
+     Subject: Your AgentForge sign-in link
+     Variables: {{ .ConfirmationURL }}
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Your AgentForge sign-in link</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0f;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 32px 0;">
+              <span style="font-size:28px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#8b5cf6,#a78bfa,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AgentForge</span>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1a1a2e;border-radius:12px;padding:40px 36px;border:1px solid rgba(139,92,246,0.15);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:22px;font-weight:600;color:#ffffff;padding:0 0 8px 0;">
+                    Sign In to AgentForge
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:15px;line-height:24px;color:#a1a1aa;padding:0 0 24px 0;">
+                    Click the button below to sign in to your account. This link will expire in 1 hour.
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 24px 0;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;background-color:#8b5cf6;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:12px 32px;border-radius:8px;mso-padding-alt:12px 32px;">
+                      Sign In
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;line-height:20px;color:#71717a;padding:0 0 16px 0;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ .ConfirmationURL }}" style="color:#8b5cf6;word-break:break-all;">{{ .ConfirmationURL }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-top:1px solid rgba(113,113,122,0.2);padding:16px 0 0 0;font-size:13px;line-height:20px;color:#52525b;">
+                    If you didn't request this link, you can safely ignore this email. Your account is secure.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="font-size:13px;color:#71717a;line-height:20px;">
+                    AgentForge &mdash; The MCP Marketplace for AI Agents
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-size:12px;color:#52525b;padding:4px 0 0 0;">
+                    KOWEX Co. Holding &nbsp;&middot;&nbsp; <a href="https://agentforge.community/privacy" style="color:#52525b;text-decoration:underline;">Privacy Policy</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+<!-- ============================================================
+     4. CHANGE EMAIL ADDRESS
+     Subject: Confirm your new email address
+     Variables: {{ .ConfirmationURL }}
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Confirm your new email address</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0f;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 32px 0;">
+              <span style="font-size:28px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#8b5cf6,#a78bfa,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AgentForge</span>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1a1a2e;border-radius:12px;padding:40px 36px;border:1px solid rgba(139,92,246,0.15);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:22px;font-weight:600;color:#ffffff;padding:0 0 8px 0;">
+                    Confirm New Email
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:15px;line-height:24px;color:#a1a1aa;padding:0 0 24px 0;">
+                    You requested to change the email address associated with your AgentForge account. Click the button below to confirm your new email.
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 24px 0;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;background-color:#8b5cf6;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:12px 32px;border-radius:8px;mso-padding-alt:12px 32px;">
+                      Confirm Email Change
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;line-height:20px;color:#71717a;padding:0 0 16px 0;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ .ConfirmationURL }}" style="color:#8b5cf6;word-break:break-all;">{{ .ConfirmationURL }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-top:1px solid rgba(113,113,122,0.2);padding:16px 0 0 0;font-size:13px;line-height:20px;color:#52525b;">
+                    If you didn't request this change, please contact <a href="mailto:support@agentforge.community" style="color:#8b5cf6;text-decoration:none;">support@agentforge.community</a> immediately.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="font-size:13px;color:#71717a;line-height:20px;">
+                    AgentForge &mdash; The MCP Marketplace for AI Agents
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-size:12px;color:#52525b;padding:4px 0 0 0;">
+                    KOWEX Co. Holding &nbsp;&middot;&nbsp; <a href="https://agentforge.community/privacy" style="color:#52525b;text-decoration:underline;">Privacy Policy</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+<!-- ============================================================
+     5. RESET PASSWORD
+     Subject: Reset your AgentForge password
+     Variables: {{ .ConfirmationURL }}
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Reset your AgentForge password</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0f;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 32px 0;">
+              <span style="font-size:28px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#8b5cf6,#a78bfa,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AgentForge</span>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1a1a2e;border-radius:12px;padding:40px 36px;border:1px solid rgba(139,92,246,0.15);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:22px;font-weight:600;color:#ffffff;padding:0 0 8px 0;">
+                    Reset Your Password
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:15px;line-height:24px;color:#a1a1aa;padding:0 0 24px 0;">
+                    We received a request to reset the password for your AgentForge account. Click the button below to choose a new password. This link expires in 1 hour.
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 24px 0;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;background-color:#8b5cf6;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:12px 32px;border-radius:8px;mso-padding-alt:12px 32px;">
+                      Reset Password
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;line-height:20px;color:#71717a;padding:0 0 16px 0;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ .ConfirmationURL }}" style="color:#8b5cf6;word-break:break-all;">{{ .ConfirmationURL }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-top:1px solid rgba(113,113,122,0.2);padding:16px 0 0 0;font-size:13px;line-height:20px;color:#52525b;">
+                    If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="font-size:13px;color:#71717a;line-height:20px;">
+                    AgentForge &mdash; The MCP Marketplace for AI Agents
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-size:12px;color:#52525b;padding:4px 0 0 0;">
+                    KOWEX Co. Holding &nbsp;&middot;&nbsp; <a href="https://agentforge.community/privacy" style="color:#52525b;text-decoration:underline;">Privacy Policy</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+<!-- ============================================================
+     6. REAUTHENTICATION
+     Subject: Confirm your identity
+     Variables: {{ .ConfirmationURL }}
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Confirm your identity</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0f;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:0 0 32px 0;">
+              <span style="font-size:28px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#8b5cf6,#a78bfa,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AgentForge</span>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#1a1a2e;border-radius:12px;padding:40px 36px;border:1px solid rgba(139,92,246,0.15);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:22px;font-weight:600;color:#ffffff;padding:0 0 8px 0;">
+                    Security Verification
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:15px;line-height:24px;color:#a1a1aa;padding:0 0 24px 0;">
+                    A sensitive action was initiated on your AgentForge account. Please confirm your identity to proceed. This link expires in 10 minutes.
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding:0 0 24px 0;">
+                    <a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;background-color:#8b5cf6;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:12px 32px;border-radius:8px;mso-padding-alt:12px 32px;">
+                      Confirm Identity
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;line-height:20px;color:#71717a;padding:0 0 16px 0;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ .ConfirmationURL }}" style="color:#8b5cf6;word-break:break-all;">{{ .ConfirmationURL }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-top:1px solid rgba(113,113,122,0.2);padding:16px 0 0 0;font-size:13px;line-height:20px;color:#52525b;">
+                    If you didn't initiate this action, please change your password immediately and contact <a href="mailto:support@agentforge.community" style="color:#8b5cf6;text-decoration:none;">support@agentforge.community</a>.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="font-size:13px;color:#71717a;line-height:20px;">
+                    AgentForge &mdash; The MCP Marketplace for AI Agents
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-size:12px;color:#52525b;padding:4px 0 0 0;">
+                    KOWEX Co. Holding &nbsp;&middot;&nbsp; <a href="https://agentforge.community/privacy" style="color:#52525b;text-decoration:underline;">Privacy Policy</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

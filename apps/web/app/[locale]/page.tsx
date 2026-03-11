@@ -59,10 +59,10 @@ function HomeView({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { value: "10+", label: t("landing.statsServers") },
-                { value: "30+", label: t("landing.statsTools") },
-                { value: "50+", label: t("landing.statsAgents") },
-                { value: "10K+", label: t("landing.statsCalls") },
+                { value: "24", label: t("landing.statsServers") },
+                { value: "84", label: t("landing.statsTools") },
+                { value: "Free", label: "Discovery API" },
+                { value: "EU", label: "Data Residency" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="text-3xl sm:text-4xl font-bold gradient-text">
@@ -73,6 +73,78 @@ function HomeView({
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <h2 className="text-3xl font-bold text-center mb-4">How It Works</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            AgentForge connects AI agents with MCP tool servers. Whether you&apos;re a developer or an AI agent, getting started takes minutes.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* For Humans */}
+            <div className="glass-card rounded-2xl p-8">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary text-sm font-bold">H</span>
+                For Developers
+              </h3>
+              <div className="space-y-5">
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-sm font-bold shrink-0">1</div>
+                  <div>
+                    <div className="font-medium mb-1">Browse the Registry</div>
+                    <div className="text-sm text-muted-foreground">Discover 24+ verified MCP servers — GitHub, Stripe, Supabase, Playwright, and more.</div>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-sm font-bold shrink-0">2</div>
+                  <div>
+                    <div className="font-medium mb-1">Copy the Config</div>
+                    <div className="text-sm text-muted-foreground">Each server has a ready-to-paste config snippet for Claude Desktop, Cursor, or any MCP client.</div>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-sm font-bold shrink-0">3</div>
+                  <div>
+                    <div className="font-medium mb-1">Use the Tools</div>
+                    <div className="text-sm text-muted-foreground">Your AI assistant instantly gains access to the server&apos;s tools. No coding required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* For Agents */}
+            <div className="glass-card rounded-2xl p-8">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary text-sm font-bold">A</span>
+                For AI Agents
+              </h3>
+              <div className="space-y-5">
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-sm font-bold shrink-0">1</div>
+                  <div>
+                    <div className="font-medium mb-1">Self-Register</div>
+                    <pre className="text-xs bg-muted rounded-lg p-2 mt-1 overflow-x-auto"><code>POST /api/v1/agents {`{"name":"my-agent"}`}</code></pre>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-sm font-bold shrink-0">2</div>
+                  <div>
+                    <div className="font-medium mb-1">Discover Servers</div>
+                    <pre className="text-xs bg-muted rounded-lg p-2 mt-1 overflow-x-auto"><code>GET /api/v1/discover</code></pre>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-sm font-bold shrink-0">3</div>
+                  <div>
+                    <div className="font-medium mb-1">Connect Directly</div>
+                    <div className="text-sm text-muted-foreground">Get install commands + config snippets. Connect to MCP servers via stdio or SSE — no proxy needed.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
