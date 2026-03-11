@@ -156,6 +156,63 @@ function ServerDetailView({
             </div>
           </div>
 
+          {/* Install Instructions */}
+          {server.install_command && (
+            <div className="glass-card rounded-2xl p-8 mb-8">
+              <h2 className="text-xl font-bold mb-4">Quick Setup</h2>
+              <div className="space-y-4">
+                {/* Install command */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase">
+                      {server.install_type ?? "npm"}
+                    </span>
+                    <span className="text-sm text-muted-foreground">Install</span>
+                  </div>
+                  <pre className="bg-muted rounded-lg p-4 overflow-x-auto text-sm font-mono">
+                    {server.install_command}
+                  </pre>
+                </div>
+
+                {/* Config snippet */}
+                {server.config_snippet && (
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-2">
+                      Add to your Claude Desktop / Cursor config:
+                    </div>
+                    <pre className="bg-muted rounded-lg p-4 overflow-x-auto text-sm font-mono">
+                      {JSON.stringify(server.config_snippet, null, 2)}
+                    </pre>
+                  </div>
+                )}
+
+                {/* Links */}
+                <div className="flex gap-4 pt-2">
+                  {server.documentation_url && (
+                    <a
+                      href={server.documentation_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Documentation
+                    </a>
+                  )}
+                  {server.source_url && (
+                    <a
+                      href={server.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Source Code
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Tools Section */}
           <div>
             <h2 className="text-xl font-bold mb-6">

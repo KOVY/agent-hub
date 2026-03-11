@@ -30,6 +30,10 @@ export interface McpServer {
   documentation_url: string | null;
   source_url: string | null;
 
+  install_type: "npm" | "pip" | "docker" | "binary" | "manual" | null;
+  install_command: string | null;
+  config_snippet: Record<string, unknown> | null;
+
   created_at: string;
   updated_at: string;
 }
