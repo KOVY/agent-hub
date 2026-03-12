@@ -62,6 +62,7 @@ export async function GET(request: NextRequest) {
       monthly_limit: agent.monthly_limit,
       calls_this_month: agent.calls_this_month,
       calls_remaining: Math.max(0, agent.monthly_limit - agent.calls_this_month),
+      preferences: agent.preferences ?? {},
       created_at: agent.created_at,
       last_seen_at: agent.last_seen_at,
     },

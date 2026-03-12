@@ -120,7 +120,29 @@ export interface Agent {
   last_seen_at: string | null;
 
   metadata: Record<string, unknown>;
+  preferences: AgentPreferences;
 
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentPreferences {
+  preferred_categories?: string[];
+  budget_range?: { min: number; max: number };
+  preferred_pricing?: "free" | "freemium" | "paid";
+  auto_discover?: boolean;
+  notification_webhook?: string;
+}
+
+// Agent review of an MCP server (verified by usage)
+export interface AgentReview {
+  id: string;
+  agent_id: string;
+  server_id: string;
+  score: number;
+  comment: string | null;
+  is_verified: boolean;
+  verified_calls: number;
   created_at: string;
   updated_at: string;
 }

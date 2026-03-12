@@ -1,4 +1,4 @@
-# AgentForge.eu — MCP Marketplace for AI Agents
+# AgentForge — MCP Marketplace for AI Agents
 
 ## Stack
 - **Monorepo**: Turborepo + pnpm
@@ -15,11 +15,16 @@
 
 ## API Architecture (Agent-First)
 - `POST /api/v1/agents` — Agent self-registration (no auth)
-- `GET /api/v1/agents/me` — Agent profile (agent key auth)
-- `GET /api/v1/discover` — Browse MCP servers (no auth)
+- `GET /api/v1/agents/me` — Agent profile + preferences (agent key auth)
+- `PATCH /api/v1/agents/me/preferences` — Update discovery preferences (agent key auth)
+- `GET /api/v1/discover` — Browse MCP servers with full-text search (no auth)
 - `POST /api/v1/server/{id}/call` — Call tool (API key auth)
+- `GET /api/v1/server/{id}/reviews` — Server reviews (no auth)
+- `POST /api/v1/server/{id}/reviews` — Submit review, auto-verified by usage (API key auth)
 - `POST /api/v1/servers` — Publish server (API key auth)
+- `GET /api/v1/health` — System health check (no auth)
 - `GET /api/v1/docs` — Machine-readable API docs
+- `GET /.well-known/agentforge.json` — Agent discovery standard
 
 ## Auth
 Two types of API keys:
@@ -36,5 +41,8 @@ pnpm build      # production build
 ```
 
 ## Database
-Migrations in `packages/db/migrations/`. Apply via Supabase dashboard or CLI.
+Migrations in `packages/db/migrations/` (001-009). Apply via Supabase dashboard or CLI.
 Service role client bypasses RLS for API routes.
+Key tables: mcp_servers, mcp_tools, agents, agent_keys, agent_reviews, usage_logs, subscriptions, ratings.
+Full-text search via tsvector on mcp_servers (name A, description B, tags C, category D).
+Views: server_review_summary (avg scores, verified counts).

@@ -101,21 +101,66 @@ export async function GET(request: Request) {
         description: "Delete your published server (owner only)",
       },
 
+      // Reviews
+      "GET /api/v1/server/{id}/reviews": {
+        auth: false,
+        description: "List reviews for a server",
+        params: {
+          verified_only: "boolean — only show usage-verified reviews",
+          limit: "number (default 20, max 100)",
+          offset: "number (default 0)",
+        },
+      },
+      "POST /api/v1/server/{id}/reviews": {
+        auth: true,
+        description: "Submit a review (auto-verified if ≥3 calls to server)",
+        body: { score: "number 1-5 (required)", comment: "string" },
+      },
+
+      // Agent preferences
+      "GET /api/v1/agents/me/preferences": {
+        auth: true,
+        description: "Get agent discovery preferences",
+      },
+      "PATCH /api/v1/agents/me/preferences": {
+        auth: true,
+        description: "Update agent preferences (merged with existing)",
+        body: {
+          preferred_categories: "string[] — filter discovery results",
+          budget_range: "{ min: number, max: number }",
+          preferred_pricing: "'free' | 'freemium' | 'paid'",
+          auto_discover: "boolean",
+          notification_webhook: "string — URL for new server notifications",
+        },
+      },
+
       // Usage
       "GET /api/v1/agent/{id}/usage": {
         auth: true,
         description: "Get usage stats for an API key",
       },
+
+      // Health & Discovery
+      "GET /api/v1/health": {
+        auth: false,
+        description: "System health check — DB connectivity, server/agent counts",
+      },
+    },
+    discovery: {
+      well_known: "GET /.well-known/agentforge.json — machine-readable discovery endpoint",
+      description: "AI agents can discover AgentForge by fetching /.well-known/agentforge.json from any AgentForge instance",
     },
     categories: [
       "finance", "legal", "data", "communication", "development",
       "ai", "productivity", "ecommerce", "healthcare", "education",
     ],
     quick_start: [
-      "1. POST /api/v1/agents with {name} → get api_key",
-      "2. GET /api/v1/discover → browse available servers",
-      "3. POST /api/v1/server/{id}/call with X-API-Key header → call tools",
-      "4. POST /api/v1/servers → publish your own server",
+      "1. GET /.well-known/agentforge.json → discover API capabilities",
+      "2. POST /api/v1/agents with {name} → get api_key",
+      "3. PATCH /api/v1/agents/me/preferences → set discovery preferences",
+      "4. GET /api/v1/discover → browse available servers",
+      "5. POST /api/v1/server/{id}/call with X-API-Key header → call tools",
+      "6. POST /api/v1/server/{id}/reviews → rate the server",
     ],
   });
 }
