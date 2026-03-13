@@ -32,26 +32,42 @@ export async function GET(request: NextRequest) {
     });
 
     if (!error && data) {
+      // Fetch review summaries for matched servers
+      const serverIds = data.map((s: Record<string, unknown>) => s.id);
+      const { data: reviews } = await supabase
+        .from("server_review_summary")
+        .select("*")
+        .in("server_id", serverIds);
+      const reviewMap = new Map(
+        (reviews ?? []).map((r: Record<string, unknown>) => [r.server_id, r])
+      );
+
       return apiSuccess({
-        servers: data.map((s: Record<string, unknown>) => ({
-          id: s.id,
-          slug: s.slug,
-          name: s.name,
-          description: s.description,
-          category: s.category,
-          pricing_model: s.pricing_model,
-          price_monthly: s.price_monthly,
-          free_tier_calls: s.free_tier_calls,
-          trust_score: s.trust_score,
-          is_verified: s.is_verified,
-          total_tools: s.total_tools,
-          tags: s.tags,
-          version: s.version,
-          install_type: s.install_type,
-          install_command: s.install_command,
-          config_snippet: s.config_snippet,
-          relevance: s.rank,
-        })),
+        servers: data.map((s: Record<string, unknown>) => {
+          const review = reviewMap.get(s.id) as Record<string, unknown> | undefined;
+          return {
+            id: s.id,
+            slug: s.slug,
+            name: s.name,
+            description: s.description,
+            category: s.category,
+            pricing_model: s.pricing_model,
+            price_monthly: s.price_monthly,
+            free_tier_calls: s.free_tier_calls,
+            trust_score: s.trust_score,
+            is_verified: s.is_verified,
+            total_tools: s.total_tools,
+            tags: s.tags,
+            version: s.version,
+            install_type: s.install_type,
+            install_command: s.install_command,
+            config_snippet: s.config_snippet,
+            relevance: s.rank,
+            reviews: review
+              ? { avg_score: review.avg_score, total: review.total_reviews, verified: review.verified_reviews }
+              : null,
+          };
+        }),
         total: data.length,
         limit,
         offset,

@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/keys", label: "API Keys", icon: "key" },
   { href: "/dashboard/billing", label: "Billing", icon: "creditcard" },
   { href: "/dashboard/usage", label: "Usage", icon: "chart" },
+  { href: "/dashboard/analytics", label: "Analytics", icon: "analytics" },
 ] as const;
 
 export function DashboardSidebar() {

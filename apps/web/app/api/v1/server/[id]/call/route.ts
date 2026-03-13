@@ -71,11 +71,23 @@ export async function POST(
     key.type
   );
 
-  // 7. Return response with rate limit headers
-  const headers = getRateLimitHeaders(
-    key.monthly_limit,
-    Math.max(0, rateCheck.remaining - 1)
-  );
+  // 7. Return response with rate limit + cost headers
+  const costPerCall =
+    server.pricing_model === "free"
+      ? 0
+      : server.price_monthly > 0
+        ? server.price_monthly / Math.max(server.free_tier_calls, 1)
+        : 0;
+
+  const headers = {
+    ...getRateLimitHeaders(
+      key.monthly_limit,
+      Math.max(0, rateCheck.remaining - 1)
+    ),
+    "X-Cost-Per-Call": String(Math.round(costPerCall * 10000) / 10000),
+    "X-Cost-Currency": "EUR",
+    "X-Server-Response-Ms": String(result.response_ms),
+  };
 
   return NextResponse.json(
     {
@@ -85,6 +97,7 @@ export async function POST(
         server: server.name,
         tool: body.tool,
         response_ms: result.response_ms,
+        cost_per_call: Math.round(costPerCall * 10000) / 10000,
         placeholder: result.placeholder,
       },
       error: result.success ? null : "Tool execution failed",

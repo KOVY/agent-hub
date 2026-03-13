@@ -1,0 +1,24 @@
+{
+  "name": "agentforge",
+  "version": "0.1.0",
+  "description": "AgentForge CLI — discover and connect to MCP tool servers",
+  "bin": {
+    "agentforge": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "dev": "tsup src/index.ts --format esm --watch"
+  },
+  "keywords": ["mcp", "ai", "agents", "tools", "agentforge"],
+  "license": "MIT",
+  "type": "module",
+  "files": ["dist"],
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

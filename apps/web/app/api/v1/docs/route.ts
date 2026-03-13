@@ -140,10 +140,89 @@ export async function GET(request: Request) {
         description: "Get usage stats for an API key",
       },
 
+      // Broadcast search
+      "POST /api/v1/search/broadcast": {
+        auth: true,
+        description: "Multi-server search in one call. Returns matched servers with tools, reviews, and install info.",
+        body: {
+          query: "string (required) — natural language search",
+          category: "string — filter by category",
+          max_servers: "number (default 5, max 20)",
+          max_results_per_server: "number (default 3, max 10)",
+          budget_max: "number — max monthly price filter",
+          preferred_pricing: "'free' | 'freemium' | 'paid'",
+        },
+      },
+
+      // Server capabilities
+      "GET /api/v1/server/{id}/capabilities": {
+        auth: false,
+        description: "Full server capabilities: tools, pricing, quality metrics, access methods, reviews",
+      },
+
+      // Products
+      "GET /api/v1/products": {
+        auth: false,
+        description: "Cross-server product search with freshness indicators",
+        params: {
+          q: "string — full-text search",
+          category: "string",
+          max_price: "number",
+          currency: "string (default EUR)",
+          server_id: "uuid — filter to specific server",
+          limit: "number (default 20, max 100)",
+          offset: "number (default 0)",
+        },
+      },
+      "GET /api/v1/server/{id}/products": {
+        auth: false,
+        description: "List products for a specific server",
+      },
+      "POST /api/v1/server/{id}/products": {
+        auth: true,
+        description: "Publish products (server owner only, max 100 per request)",
+        body: {
+          products: "Array<{ name, description?, category?, price?, currency?, attributes?, image_url? }>",
+        },
+      },
+
+      // Purchase consent flow
+      "POST /api/v1/purchase/request": {
+        auth: true,
+        description: "Create purchase consent request. Returns approval URL for owner.",
+        body: {
+          server_id: "string (required)",
+          items: "Array<{ name, product_id?, price, quantity?, currency? }>",
+          note: "string — agent's reason",
+          expires_in: "number — seconds (default 3600, max 86400)",
+        },
+      },
+      "GET /api/v1/purchase/{id}/status": {
+        auth: true,
+        description: "Check purchase request status (pending/approved/rejected/expired)",
+      },
+
+      // Recommendations
+      "GET /api/v1/agents/recommendations": {
+        auth: true,
+        description: "Personalized server recommendations based on preferences and collaborative filtering",
+        params: { limit: "number (default 10, max 50)" },
+      },
+
       // Health & Discovery
       "GET /api/v1/health": {
         auth: false,
         description: "System health check — DB connectivity, server/agent counts",
+      },
+    },
+    cost_headers: {
+      description: "POST /api/v1/server/{id}/call returns cost transparency headers",
+      headers: {
+        "X-Cost-Per-Call": "Estimated cost per call in EUR",
+        "X-Cost-Currency": "EUR",
+        "X-Server-Response-Ms": "Actual server response time",
+        "X-RateLimit-Limit": "Monthly call quota",
+        "X-RateLimit-Remaining": "Remaining calls this month",
       },
     },
     discovery: {
