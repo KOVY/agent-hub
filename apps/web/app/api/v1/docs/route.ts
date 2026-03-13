@@ -209,6 +209,22 @@ export async function GET(request: Request) {
         params: { limit: "number (default 10, max 50)" },
       },
 
+      // WebMCP (Chrome 146+ client-side tools)
+      "GET /api/v1/webmcp/discover": {
+        auth: false,
+        description: "Discover WebMCP-enabled servers (client-side browser tools)",
+        params: { q: "string", category: "string", limit: "number", offset: "number" },
+      },
+      "POST /api/v1/webmcp/snippet": {
+        auth: true,
+        description: "Generate WebMCP integration snippet for a server",
+        body: {
+          server_id: "string (required)",
+          website_url: "string (required)",
+          api_type: "'declarative' | 'imperative' | 'both' (default imperative)",
+        },
+      },
+
       // Health & Discovery
       "GET /api/v1/health": {
         auth: false,

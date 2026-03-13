@@ -32,6 +32,22 @@ export async function GET(request: Request) {
         tool_calling: true,
         server_publishing: true,
         agent_reviews: true,
+        broadcast_search: true,
+        product_listings: true,
+        purchase_consent_flow: true,
+        webmcp: true,
+      },
+      protocols: {
+        mcp: {
+          description: "Model Context Protocol — backend server tools (stdio/SSE)",
+          discovery: `${baseUrl}/api/v1/discover`,
+        },
+        webmcp: {
+          description: "Web MCP — client-side browser tools via navigator.modelContext (Chrome 146+)",
+          discovery: `${baseUrl}/api/v1/webmcp/discover`,
+          snippet_generator: `${baseUrl}/api/v1/webmcp/snippet`,
+          spec: "https://github.com/webmachinelearning/webmcp",
+        },
       },
       authentication: {
         type: "api_key",
