@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description:
     "Discover, connect, and pay for MCP tool servers. The open marketplace that lets AI agents autonomously use the tools they need.",
   metadataBase: new URL(APP_URL),
+  verification: {
+    google: "gxZyG8b5BEax5MeFcJJAt24nC0DPDdPih2-L9frSrCs",
+  },
   openGraph: {
     type: "website",
     siteName: "AgentForge",
